@@ -23,73 +23,31 @@ export default function App() {
     console.log(state);
   }
 
-  function handleChange(e) {
-    const name=(e)=>{
-      if (
-        e.nativeEvent.target == 7 ||
-        e.nativeEvent.target.placeholder === "Ingresa el nombre de contacto"
-      ) {
-        let name = e.nativeEvent.text;
-        return name
-      }
-    }
-
-    const description =(e)=>{
-      if (
-        e.nativeEvent.target == 9 ||
-        e.nativeEvent.target.placeholder === "Ingresa el numero del contacto"
-      ) {
-        let description = e.nativeEvent.text;
-        return description
-      } 
-    }
-
-    const email =(e)=>{
-      if (
-        e.nativeEvent.target == 13 ||
-        e.nativeEvent.target.placeholder === "Ingresa el email del contacto"
-      ) {
-        let email = e.nativeEvent.text;
-        return email
-      } 
-    }
-
-    console.log(name(e));
-    console.log(description(e));
-    console.log(email(e));
-
-    /* console.log(e.nativeEvent.text)
-    console.log(e.nativeEvent.target)
-    console.log(e.nativeEvent.target.placeholder) */
+  function handleChange(name,value) {
+    setState({...state,[name]:value})
   }
 
   return (
     <View style={styles.container}>
       <Text>An contact list app!!!</Text>
       <TextInput
-        onChange={(e)=>{
-          var name = handleChange(e)
-          console.log(name);
-        }}
+        onChangeText={(value) => handleChange("name", value)}
         style={styles.input}
         placeholder="Ingresa el nombre de contacto"
         name="name"
-        required
       />
       <TextInput
-        onChange={handleChange}
+        onChangeText={(value) => handleChange("number", value)}
         style={styles.input}
         placeholder="Ingresa el numero del contacto"
         keyboardType="number-pad"
         name="number"
-        required
       />
       <TextInput
-        onChange={handleChange}
+        onChangeText={(value) => handleChange("email", value)}
         style={styles.input}
         placeholder="Ingresa el email del contacto"
-        textContentType="emailAddress"
-        name="number"
+        name="email"
       />
       <Button
         onPress={addContact}
