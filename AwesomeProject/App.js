@@ -20,11 +20,26 @@ export default function App() {
   }
 
   function addContact() {
-    console.log(state);
+    if (state.name == "" || state.email == "") {
+      Aviso();
+    } else {
+      fetch("localhost:3000/api/contacts", {
+        method: "POST",
+        body: JSON.stringify(state),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+      //console.log(state)
+    }
   }
 
-  function handleChange(name,value) {
-    setState({...state,[name]:value})
+  function handleChange(name, value) {
+    setState({ ...state, [name]: value });
   }
 
   return (
